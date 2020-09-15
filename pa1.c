@@ -1,6 +1,16 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+const char *prime(int x){
+  do {
+    x-=2;
+    if (x==1) return "yes";
+    else if (x==0) return "no";
+
+  } while(x!=0 || x!=1);
+  return "Error.";
+}
+
 int main(int argc, char* argv[argc +1]) {
   if (argc>2 || argc==1) {
     printf("Please enter 1 file name.\n");
@@ -14,30 +24,10 @@ int main(int argc, char* argv[argc +1]) {
     return EXIT_SUCCESS;
   }
 
-
-  printf("other way:\n");
   int num=0;
   char content[10];
   while (fscanf(f,"%[^\n]\n",content) != EOF ) {
+    printf("%s\n", prime(atoi(content)));
     num++;
   }
-
-
-  f = fopen(argv[1],"r");
-  int *numbers = (int*) malloc(num * sizeof(int));
-  for (size_t i = 0; i < num; ++i) {
-    int number;
-    fscanf(f,"%d\n",&number);
-    numbers[i]=number;
-    printf("%d\n", numbers[i]);
-  }
-  fclose(f);
-  free(numbers);
-
-
-  for (size_t i = 1; i < argc; i++) {
-    printf("%s\n", argv[i]);
-  }
-
-
 }
