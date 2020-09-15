@@ -9,38 +9,32 @@ int main(int argc, char* argv[argc +1]) {
 
   FILE *f;
   f = fopen(argv[1],"r");
-  if (f==0 || f==NULL) {
+  if (f==0) {
     printf("File error.\n");
     return EXIT_SUCCESS;
   }
 
-  int i=0;
-  char line = fgetc(f);
-  while (line!=EOF) {
-    printf("%c", line);
-    line = fgetc(f);
-    i++;
-  }
-  printf("\n%d\n", n);
 
   printf("other way:\n");
-  int x=0;
-  int number;
-  while (fscanf(f,"%[^\n]\n",number) != EOF ) {
-    printf("%d\n", number);
-    x++;
+  int num=0;
+  char content[10];
+  while (fscanf(f,"%[^\n]\n",content) != EOF ) {
+    num++;
   }
 
-/*
-  int *numbers = (int*) malloc(n * sizeof(int));
-  for (size_t i = 0; i < n; ++i) {
-    printf("%c", line);
-    //fscanf(f, "%d", numbers+i);
-    line = fgetc(f);
+
+  f = fopen(argv[1],"r");
+  int *numbers = (int*) malloc(num * sizeof(int));
+  for (size_t i = 0; i < num; ++i) {
+    int number;
+    fscanf(f,"%d\n",&number);
+    numbers[i]=number;
+    printf("%d\n", numbers[i]);
   }
   fclose(f);
   free(numbers);
-*/
+
+
   for (size_t i = 1; i < argc; i++) {
     printf("%s\n", argv[i]);
   }
