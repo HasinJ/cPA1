@@ -1,14 +1,13 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-const char *prime(int x){
-  do {
-    x-=2;
-    if (x==1) return "yes";
-    else if (x==0) return "no";
-
-  } while(x!=0 || x!=1);
-  return "Error.";
+void prime(int x){
+  for (size_t i = 2; i < x/2; i++) {
+    if(x%i==0) {
+      printf("no\n");
+      return;}
+  }
+  printf("yes\n");
 }
 
 int main(int argc, char* argv[argc +1]) {
@@ -24,10 +23,8 @@ int main(int argc, char* argv[argc +1]) {
     return EXIT_SUCCESS;
   }
 
-  int num=0;
   char content[10];
   while (fscanf(f,"%[^\n]\n",content) != EOF ) {
-    printf("%s\n", prime(atoi(content)));
-    num++;
+    prime(atoi(content));
   }
 }
