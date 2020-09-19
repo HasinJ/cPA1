@@ -20,24 +20,27 @@ void InsertHere(int x,struct Node* node){
 }
 
 void Insert(int x){
+
   if (head==0) {
     head = calloc(1, sizeof(struct Node)); //allocate memory in the node as 0 (for num)
     head->num=x;
     return;
-  }
-
-  if (head->num>x) {
-    struct Node * new;
-    new = (struct Node *) malloc(sizeof(struct Node));
-    new->num = x;
-    new->next = head;
-    head=new;
-    return;
+  } else {
+    if (head->num==x) return;
+    if (head->num>x) {
+      struct Node * new;
+      new = (struct Node *) malloc(sizeof(struct Node));
+      new->num = x;
+      new->next = head;
+      head=new;
+      return;
+    }
   }
 
   struct Node* current=head;
 
   while (current->next != 0){
+    if (current->num==x) return;
     if(current->next->num>x) {
       InsertHere(x,current);
       return;
@@ -51,15 +54,20 @@ void Insert(int x){
 }
 
 void Delete(int x){ //should deal with an already sorted list
-  if (head->num==x) {
-    struct Node* temp=head;
-    head=head->next;
-    free(temp);
-    return;
+  if (head==0) return;
+  else{
+    if (head->num==x) {
+      struct Node* temp=head;
+      head=head->next;
+      free(temp);
+      return;
+    }
   }
+
   struct Node* current=head;
   while (current->next->num!=x) {
     current=current->next;
+    if (current->next==0) return;
   }
   struct Node* temp=current->next;
   current->next=current->next->next;
@@ -94,23 +102,29 @@ int main(int argc, char *argv[argc+1]) {
 
     if(strcmp(content,"INSERT")==0){
       fscanf(f,"%d",&nextNum);
-      printf("insert %d\n",nextNum);
+      //printf("insert %d\n",nextNum);
       //printf("%d\n", nextNum);
       Insert(nextNum);
     } else {
       if(strcmp(content,"DELETE")==0){
         fscanf(f,"%d",&nextNum);
-        printf("delete %d\n",nextNum);
+        //printf("delete %d\n",nextNum);
         //printf("%d\n", nextNum);
         Delete(nextNum);
+      }else{
+        printf("File needs to contain INSERT or DELETE followed by an integer with a space in between.\n");
+        return EXIT_SUCCESS;
       }
     }
 
     for(struct Node* current=head; current != 0; current=current->next){
       printf("%d ", current->num);
     }
-    printf("\n");
+    if(head==0) printf("EMPTY\n");
+    else printf("\n");
   }
+
+  /* PERSONAL TESTS
   Insert(3);
   Insert(6);
   Insert(5);
@@ -133,6 +147,8 @@ int main(int argc, char *argv[argc+1]) {
   }
   printf("\n");
   printf("head=%d\n", head->num);
+  */
+
   freeEverything(head);
 
   return EXIT_SUCCESS;
