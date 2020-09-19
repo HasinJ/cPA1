@@ -91,31 +91,25 @@ int main(int argc, char *argv[argc+1]) {
   char content[10];
   while (fscanf(f,"%s",content) != EOF ) {
     int nextNum;
-    /*
-      could be swith statement here and the switch statement can have Ordered() without break
-    */
 
-    switch (content) {
-      case "INSERT":
-      printf("insert the next number\n");
-    }
-
-    /*
     if(strcmp(content,"INSERT")==0){
       fscanf(f,"%d",&nextNum);
+      printf("insert %d\n",nextNum);
       //printf("%d\n", nextNum);
-      Insert(&nextNum);
+      Insert(nextNum);
+    } else {
+      if(strcmp(content,"DELETE")==0){
+        fscanf(f,"%d",&nextNum);
+        printf("delete %d\n",nextNum);
+        //printf("%d\n", nextNum);
+        Delete(nextNum);
+      }
     }
 
-    if(strcmp(content,"DELETE")==0){
-      printf("delete the next number\n");
-      fscanf(f,"%d",&nextNum);
-      //printf("%d\n", nextNum);
-      Delete(&nextNum);
+    for(struct Node* current=head; current != 0; current=current->next){
+      printf("%d ", current->num);
     }
-    */
-
-
+    printf("\n");
   }
   Insert(3);
   Insert(6);
