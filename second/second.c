@@ -18,12 +18,33 @@ void Insert(int x){
     head->num=x;
     return;
   }
+
   struct Node* temp=head;
-  head=calloc(1,sizeof(struct Node));
-  head->num=x;
-  head->next=temp;
 
+  while (temp->next != 0){
+    temp = temp->next;
+  }
 
+  temp->next = calloc(1,sizeof(struct Node));
+  temp->next->num = x;
+  temp->next->next = 0;
+
+}
+
+void newInsert(int x){
+  struct Node* previous=head;
+  struct Node* current=head->next;
+
+  while (current->num < x){
+    previous=previous->next;
+    current = current->next;
+  }
+
+  struct Node * new;
+  new = (struct Node *) malloc(sizeof(struct Node));
+  new->num = x;
+  new->next = previous->next;
+  previous->next=new;
 }
 
 void Delete(int x){ //should deal with an already sorted list
@@ -54,27 +75,34 @@ int main(int argc, char *argv[argc+1]) {
   }
 
   char content[10];
+  int current;
   while (fscanf(f,"%s",content) != EOF ) {
-    int temp;
+    int nextNum;
+    assert(current>-1);
     /*
       could be swith statement here and the switch statement can have Ordered() without break
     */
     if(strcmp(content,"INSERT")==0){
       printf("insert the next number\n");
-      fscanf(f,"%d",&temp);
-      printf("%d\n", temp);
+      fscanf(f,"%d",&nextNum);
+      printf("%d\n", nextNum);
+      current++;
     }
 
     if(strcmp(content,"DELETE")==0){
       printf("delete the next number\n");
-      fscanf(f,"%d",&temp);
-      printf("%d\n", temp);
+      fscanf(f,"%d",&nextNum);
+      printf("%d\n", nextNum);
+      current--;
     }
 
   }
   Insert(1);
   Insert(2);
   Insert(3);
+  Insert(6);
+  newInsert(5);
+  newInsert(4);
   for(struct Node* current=head; current != 0; current=current->next){
     printf("%d ", current->num);
   }
