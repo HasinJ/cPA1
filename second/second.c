@@ -9,7 +9,6 @@ struct Node{
 };
 
 struct Node* head=0; //empty
-struct Node* current=0; //empty
 
 void InsertHere(int x,struct Node* node){
   struct Node * new;
@@ -92,7 +91,7 @@ int main(int argc, char *argv[argc+1]) {
   FILE *f;
   f = fopen(argv[1],"r");
   if (f==0) {
-    printf("File error.\n");
+    printf("error\n");
     return EXIT_SUCCESS;
   }
 
