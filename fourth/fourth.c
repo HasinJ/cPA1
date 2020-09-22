@@ -11,7 +11,7 @@ void freeEverything(int** matrix, int dimsions){
 void read(int** matrix, int dimsions){
   for (size_t i = 0; i < dimsions; i++) {
     for (size_t j = 0; j < dimsions; j++) {
-      printf("%d ", matrix[i][j]);
+      printf("%d\t", matrix[i][j]);
     }
     printf("\n");
   }
@@ -68,7 +68,7 @@ int main(int argc, char *argv[argc+1]) {
   //printf("\ndimensions=%dx%d\n", x,x);
   //checks for even/odd
   if ((x/2)==((x-1)/2)) Matrix(x); //odd
-  else printf("error.\n"); //even
+  else printf("error\n"); //even
 
 
 }
