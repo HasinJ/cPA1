@@ -25,15 +25,34 @@ void Matrix(FILE* f,int dimsions) {
     matrix[i]=calloc(dimsions,sizeof(int*));//columns
   }
 
-  int current = matrix[1][(dimsions/2)+1],count=0;
-  while (current!=5){
-    count++;
-    printf("%d\n", count);
-    matrix[2][2]=5;
-    current=matrix[2][2];
+  int count=1,row=0,col=(dimsions-1)/2;
+  int* current = &matrix[row][col]; //initial row & column
+  while (*current!=dimsions*dimsions){
+    if(*current!=0){
+      row+=1; //going backwards
+      col-=1; //going backwards
+      row+=1;
+      printf("count=%d row=%d col=%d\n", count,row,col);
+      current=&matrix[row][col];
+      *current=count++;
+      row-=1;
+      col+=1;
+      if(row<0) row=dimsions-1; //go to the last row if upper element is out of reach
+      if(col>2) col=0; //go to the first column if righter element is out of reach
+      current=&matrix[row][col];
+      read(matrix,dimsions);
+      continue;
+    }
+    printf("count=%d row=%d col=%d\n", count,row,col);
+    *current=count++;
+    row-=1;
+    col+=1;
+    if(row<0) row=dimsions-1; //go to the last row if upper element is out of reach
+    if(col>2) col=0; //go to the first column if righter element is out of reach
+    current=&matrix[row][col];
+    read(matrix,dimsions);
   }
 
-  read(matrix,dimsions);
   freeEverything(matrix,dimsions);
 }
 
