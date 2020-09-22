@@ -49,15 +49,15 @@ void Matrix(int dimsions) {
 
   while (count<dimsions*dimsions){
     current=&matrix[row][col]; //selects
-    printf("count=%d row=%d col=%d\n", count,row,col);
+    //printf("count=%d row=%d col=%d\n", count,row,col);
     *current=count++;//fills
-    read(matrix,dimsions);
+    //read(matrix,dimsions);
     RowCol(matrix,&row,&col,dimsions); //changes
-    printf("NEXT count=%d row=%d col=%d\n\n", count,row,col);
+    //printf("NEXT count=%d row=%d col=%d\n\n", count,row,col);
   }
 
   matrix[row][col]=count; //last
-  printf("finish:\n");
+  //printf("finish:\n");
   read(matrix,dimsions);
   freeEverything(matrix,dimsions);
 }
