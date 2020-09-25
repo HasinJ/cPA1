@@ -9,7 +9,7 @@ void freeEverything(int** matrix,int dimsions){
   free(matrix);
 }
 
-void read(int** matrix, int dimsions){
+void read(int **matrix, int dimsions){
   for (size_t i = 0; i < dimsions; i++) {
     for (size_t j = 0; j < dimsions; j++) {
       printf("%d \t",matrix[i][j]);
@@ -29,6 +29,9 @@ void getAnswer(int** matrix, int dimsions, int* answer){
       return;
     }else{
       if (dimsions>2) {
+        //delete the rows and columns we dont want for now
+
+
         return;
       }
     }
@@ -48,8 +51,6 @@ void fill(FILE* f, int** matrix,int dimsions){
   int answer;
   getAnswer(matrix,dimsions,&answer);
   printf("answer=%d\n",answer);
-
-
 }
 
 void Matrix(FILE* f,int dimsions){
