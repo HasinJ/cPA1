@@ -43,8 +43,8 @@ void getAnswer(int** matrix, int**temp, int dimsions, int* answer, int* deletedr
           tempj=0;
           for (size_t j = 0; j < dimsions; j++) {
             if (j==*deletedcol) continue;
-            printf("delete stuff row first: %d %d\n", *deletedrow,*deletedcol);
-            printf("i=%ld j=%ld\n",i,j);
+            //printf("delete stuff row first: %d %d\n", *deletedrow,*deletedcol);
+            //printf("i=%ld j=%ld\n",i,j);
             temp[tempi][tempj++]=matrix[i][j];
           }
           tempi++;
@@ -52,17 +52,17 @@ void getAnswer(int** matrix, int**temp, int dimsions, int* answer, int* deletedr
 
         int a=temp[0][0],b=temp[0][1],c=temp[1][0],d=temp[1][1];
 
-        if ( (*deletedcol+1/2)==((*deletedcol)/2)) {
+        if ((*deletedcol+1/2)==((*deletedcol)/2) || *deletedcol+1==3) {
           *answer += (matrix[*deletedrow][*deletedcol])*((a*d)-(b*c)); //odd
-          printf("\nanswer for now=%d %d*%d\n", *answer,(matrix[*deletedrow][*deletedcol]),((a*d)-(b*c)));
+          //printf("\nanswer for now=%d %d*%d\n", *answer,(matrix[*deletedrow][*deletedcol]),((a*d)-(b*c)));
         }else {
           *answer -= (matrix[*deletedrow][*deletedcol])*((a*d)-(b*c)); //even
-          printf("\nanswer for now=%d %d*%d\n", *answer,(matrix[*deletedrow][*deletedcol]),((a*d)-(b*c)));
+          //printf("\nanswer for now=%d %d*%d\n", *answer,(matrix[*deletedrow][*deletedcol]),((a*d)-(b*c)));
         }
 
-        printf("\ntemp:\n");
-        read(temp,dimsions-1);
-        printf("\n");
+        //printf("\ntemp:\n");
+        //read(temp,dimsions-1);
+        //printf("\n");
         freeEverything(temp,dimsions-1);
         if(*deletedcol==dimsions-1) {
           return;
@@ -95,7 +95,8 @@ void fill(FILE* f, int** matrix,int dimsions){
   int **temp=0;
   getAnswer(matrix,temp,dimsions,&answer,&deletedcol,&deletedrow);
 
-  printf("answer=%d\n",answer);
+  //printf("answer=%d\n",answer);
+  printf("%d\n", answer);
 }
 
 void Matrix(FILE* f,int dimsions){
@@ -104,7 +105,7 @@ void Matrix(FILE* f,int dimsions){
     matrix[i]=calloc(dimsions,sizeof(int*));
   }
   fill(f,matrix,dimsions);
-  read(matrix,dimsions);
+  //read(matrix,dimsions);
   freeEverything(matrix,dimsions);
 }
 
